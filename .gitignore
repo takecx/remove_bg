@@ -130,3 +130,9 @@ dmypy.json
 
 examples/
 output/
+
+mask/
+
+trimaps/
+
+.vscode/
