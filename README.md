@@ -3,6 +3,7 @@ Remove background from image
 
 ![nekochan](./images/sample_nekochan.png)
 ![man](./images/sample_man.jpg)
+*original image from [PAKUTASO](https://www.pakutaso.com/)*
 
 ## Workflow
 
