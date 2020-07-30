@@ -103,7 +103,7 @@ class BackgroundRemover(object):
             trimap[dilated_bi == 0] = 0
             return trimap
         self.trimap = gen_trimap(
-            self.mask, k_size=self.kernel_size, iteration=self.iteration)
+            self.mask, k_size=(self.kernel_size, self.kernel_size), iteration=self.iteration)
         cv2.imwrite(self.trimap_image_name, self.trimap)
 
     def run_FBA_Matting(self):
@@ -145,9 +145,10 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("input_image",
                         help="input .png image path")
-    parser.add_argument("--kernel_size", type=tuple, default=(5, 5))
+    parser.add_argument("--kernel_size", type=int, default=5)
     parser.add_argument("--iteration", type=int, default=3)
     args = parser.parse_args()
+    print(args.input_image, args.kernel_size, args.iteration)
     return args
 
 
@@ -162,5 +163,6 @@ if __name__ == '__main__':
         remover.make_trimap_image()
         remover.run_FBA_Matting()
     except Exception as e:
+        import traceback
         print('matting failed: ', e)
-        print(e.__traceback__)
+        print(traceback.format_exc())
