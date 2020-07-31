@@ -113,7 +113,7 @@ class BackgroundRemover(object):
         self._create_output()
 
     def _check_matting_model(self):
-        if not os.path.exists('./FBA_Matting/FBA.pth'):
+        if not os.path.exists(os.path.join(os.path.dirname(__file__), 'FBA_Matting/FBA.pth')):
             print('There is no model file.¥nYou should download it from https://drive.google.com/uc?id=1T_oiKDE_biWf2kqexMEN7ObWqtXAzbB1 and place it to ./FBA_Matting/FBA.pth')
             raise Exception(
                 'There is no model file. You should download it from https://drive.google.com/uc?id=1T_oiKDE_biWf2kqexMEN7ObWqtXAzbB1 and place it to ./FBA_Matting/FBA.pth')
@@ -122,7 +122,8 @@ class BackgroundRemover(object):
         class Args:
             encoder = 'resnet50_GN_WS'
             decoder = 'fba_decoder'
-            weights = './FBA_Matting/FBA.pth'
+            weights = os.path.join(os.path.dirname(
+                __file__), 'FBA_Matting/FBA.pth')
         args = Args()
         self.model = build_model(args)
 
