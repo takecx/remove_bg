@@ -7,9 +7,39 @@ Remove background from image
 
 ## Workflow
 
-1. Create mask image using Image Segmentation technique.
+1. Create mask image using [Image Segmentation technique.](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/)
 2. Create trimap image using Morphology(`cv2.erode()`,`cv2.dilate()`).
-3. Matting image using [FBA_Matting](https://github.com/MarcoForte/FBA_Matting)
+3. Apply Image Matting using [FBA_Matting](https://github.com/MarcoForte/FBA_Matting)
+
+## Supported foreground object type
+
+Supported foreground object type depends on [DEEPLABV3-RESNET101](https://pytorch.org/hub/pytorch_vision_deeplabv3_resnet101/) output.  
+This model trained on [PASCAL VOC 2012 semantic segmentation benchmark](https://www.research.ed.ac.uk/portal/files/20017166/ijcv_voc14.pdf).  
+[Class index of the dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/segexamples/index.html) is shown as below.
+
+```
+[Class List]
+1. aeroplane
+2. bicycle
+3. bird
+4. boat
+5. bottle
+6. bus
+7. car
+8. cat
+9. chair
+10. cow
+11. diningtable
+12. dog
+13. horse
+14. motorbike
+15. person
+16. potted plant
+17. sheep
+18. sofa
+19. train
+20. tv/monitor
+```
 
 ## Supported input image format
 
