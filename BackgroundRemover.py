@@ -10,7 +10,7 @@ from torchvision import transforms
 
 # FBA_Matting scripts
 if not 'FBA_Matting' in sys.path:
-    sys.path.append(os.path.join(os.path.dirname('__file__'), 'FBA_Matting'))
+    sys.path.append(os.path.join(os.path.dirname(__file__), 'FBA_Matting'))
 from demo import np_to_torch, pred, scale_input
 from dataloader import read_image, read_trimap
 from networks.models import build_model
