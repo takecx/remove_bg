@@ -24,6 +24,10 @@ class BackgroundRemover(object):
         self.kernel_size = kernel_size
         self.iteration = iteration
 
+        self.mask_dir = os.path.join(os.path.dirname(__file__), './mask/')
+        self.trimap_dir = os.path.join(os.path.dirname(__file__), './trimaps/')
+        self.output_dir = os.path.join(os.path.dirname(__file__), './output/')
+
         self._initialize(input_image)
 
     def _initialize(self, input_image):
@@ -34,12 +38,12 @@ class BackgroundRemover(object):
 
         image_name = os.path.basename(input_image)
         self.image_path = input_image
-        self.mask_image_name = os.path.join('./mask/', image_name)
-        self.trimap_image_name = os.path.join('./trimaps/', image_name)
+        self.mask_image_name = os.path.join(self.mask_dir, image_name)
+        self.trimap_image_name = os.path.join(self.trimap_dir, image_name)
         self.output_file = os.path.join(
-            './output/', image_name.split('.')[0] + '_fg.png')
+            self.output_dir, image_name.split('.')[0] + '.png')
         self.output_mask_file = os.path.join(
-            './output/', image_name.split('.')[0] + '_fg_mask.png')
+            self.output_dir, image_name.split('.')[0] + '_mask.png')
 
     def _load_image(self, input_image):
         self.img = cv2.imread(input_image)
@@ -48,9 +52,9 @@ class BackgroundRemover(object):
         self.img = cv2.resize(self.img, (320, 320))
 
     def _make_output_dirs(self):
-        os.makedirs('./mask/', exist_ok=True)
-        os.makedirs('./trimaps/', exist_ok=True)
-        os.makedirs('./output/', exist_ok=True)
+        os.makedirs(self.mask_dir, exist_ok=True)
+        os.makedirs(self.trimap_dir, exist_ok=True)
+        os.makedirs(self.output_dir, exist_ok=True)
 
     def _prepare_trimap_model(self):
         self.device = torch.device(
